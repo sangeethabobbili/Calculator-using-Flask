@@ -1,0 +1,21 @@
+ git clone https://github.com/ashutoshpipriye/Calculator-using-Flask.git
+  cd Calculator-using-Flask/
+ubuntu@ip-172-31-3-39:~/Calculator-using-Flask$ cat Dockerfile
+From python:3.9
+Copy . /app
+Workdir /app
+Run apt-get update
+RUN pip install --upgrade pip
+Run pip install flask
+ENV FLASK_APP=calc.py
+Expose 5000
+Cmd [ "flask","run","--host=0.0.0.0" ]
+
+ sudo docker build -t dockergeethaacc/clacflask:1 .
+  docker login -u dockergeethaacc -u geetha2104
+  docker push dockergeethaacc/clacflask:1
+  ubuntu@ip-172-31-34-130:~$ docker run -d --name calcflaskc -p 5000:5000 dockergeethaacc/clacflask:1
+ubuntu@ip-172-31-34-130:~$ docker ps
+CONTAINER ID   IMAGE                         COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+a44a0396584f   dockergeethaacc/clacflask:1   "flask run --host=0.…"   34 seconds ago   Up 33 seconds   0.0.0.0:5000->5000/tcp, :::5000->5000/tcp   calcflaskc
+http://3.113.25.50:5000/
